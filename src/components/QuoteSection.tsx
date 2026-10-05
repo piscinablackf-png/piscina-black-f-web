@@ -7,35 +7,58 @@ export default function QuoteSection() {
     name: "",
     email: "",
     phone: "",
-    service: "Construcción de piscina nueva",
+    service: "Instalación completa (Llave en mano)",
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name) {
-      alert("Por favor, ingresa tu nombre.");
+    if (!formData.name || !formData.email) {
+      alert("Por favor, ingresa tu nombre y correo electrónico.");
       return;
     }
 
-    const subject = `Nueva Cotización web - ${formData.name}`;
-    const body = `¡Hola! Tienes una nueva solicitud de cotización desde la página web.
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage("");
 
-Nombre: ${formData.name}
-Correo: ${formData.email}
-Teléfono: ${formData.phone}
-Servicio de interés: ${formData.service}
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-Mensaje o detalles:
-${formData.message}
-`;
+      const data = await response.json();
 
-    const encodedSubject = encodeURIComponent(subject);
-    const encodedBody = encodeURIComponent(body);
-    
-    // Redirigir a la aplicación de correo por defecto
-    window.location.href = `mailto:piscinablackf@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+      if (!response.ok) {
+        throw new Error(data.error || 'Ocurrió un error al enviar el formulario.');
+      }
+
+      setSubmitStatus('success');
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "Instalación completa (Llave en mano)",
+        message: ""
+      });
+      
+      // Volver al estado normal después de 5 segundos
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error: any) {
+      setSubmitStatus('error');
+      setErrorMessage(error.message || "Error de conexión. Inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -128,8 +151,9 @@ ${formData.message}
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       required
-                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" 
+                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors disabled:opacity-50" 
                       placeholder="Ej. Juan Pérez" 
                     />
                   </div>
@@ -140,8 +164,9 @@ ${formData.message}
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       required
-                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" 
+                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors disabled:opacity-50" 
                       placeholder="tucorreo@ejemplo.com" 
                     />
                   </div>
@@ -154,7 +179,8 @@ ${formData.message}
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors" 
+                      disabled={isSubmitting}
+                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors disabled:opacity-50" 
                       placeholder="+56 9 5457 0802" 
                     />
                   </div>
@@ -164,7 +190,8 @@ ${formData.message}
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 appearance-none transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 appearance-none transition-colors disabled:opacity-50"
                     >
                       <option>Instalación completa (Llave en mano)</option>
                       <option>Venta de piscina (Solo casco)</option>
@@ -187,13 +214,47 @@ ${formData.message}
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors resize-none" 
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors resize-none disabled:opacity-50" 
                     placeholder="Cuéntanos más sobre lo que necesitas o dónde se realizaría la instalación..."
                   ></textarea>
                 </div>
-                <button type="submit" className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-4 px-8 rounded-xl text-lg transition-all hover:scale-[1.02] flex items-center justify-center gap-3">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                  Enviar Cotización por Correo
+
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-900/30 border border-green-500/50 rounded-xl text-green-400 text-center font-medium animate-pulse">
+                    ¡Cotización enviada correctamente! Te contactaremos pronto.
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-xl text-red-400 text-center font-medium">
+                    {errorMessage}
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className={`w-full font-bold py-4 px-8 rounded-xl text-lg transition-all flex items-center justify-center gap-3 ${
+                    isSubmitting 
+                      ? 'bg-cyan-900 text-cyan-200 cursor-not-allowed' 
+                      : 'bg-cyan-500 hover:bg-cyan-400 text-black hover:scale-[1.02]'
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                      Enviar Cotización por Correo
+                    </>
+                  )}
                 </button>
               </form>
             </div>
