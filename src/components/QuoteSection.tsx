@@ -166,14 +166,16 @@ ${formData.message}
                       onChange={handleChange}
                       className="w-full bg-blue-950/50 border border-blue-900 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 appearance-none transition-colors"
                     >
-                      <option>Construcción de piscina nueva</option>
+                      <option>Instalación completa (Llave en mano)</option>
+                      <option>Venta de piscina (Solo casco)</option>
+                      <option>Reparación y restauración (Fibra, Hormigón, Losa)</option>
+                      <option>Mantenimiento técnico y bombas</option>
                       <option>Cotizar modelo 9x3.40 m</option>
                       <option>Cotizar modelo 7x3.40 m</option>
                       <option>Cotizar modelo 6x3 m</option>
                       <option>Cotizar modelo 5.30x3.10 m</option>
                       <option>Cotizar modelo 4.80x2.60 m</option>
                       <option>Cotizar modelo 3x2 m</option>
-                      <option>Servicio de mantenimiento</option>
                       <option>Otro</option>
                     </select>
                   </div>
