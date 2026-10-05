@@ -65,7 +65,7 @@ export default function Footer() {
           <p className="text-gray-500 text-sm text-center md:text-left">
             &copy; {new Date().getFullYear()} Piscina Black-F. Todos los derechos reservados.
           </p>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors text-sm group">
+          <a href="https://redenlace.cl/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors text-sm group">
             <img src="/red-enlace-logo.png" alt="Logo Red-Enlace" className="h-5 w-auto opacity-50 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0" />
             <span>Desarrollado por Red-Enlace Soluciones Digitales</span>
           </a>
