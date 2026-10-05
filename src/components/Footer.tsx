@@ -61,8 +61,14 @@ export default function Footer() {
           
         </div>
 
-        <div className="pt-8 border-t border-white/10 text-center md:text-left text-gray-500 text-sm flex flex-col md:flex-row justify-between items-center">
-          <p>&copy; {new Date().getFullYear()} Piscina Black-F. Calidad, lujo y confianza.</p>
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm text-center md:text-left">
+            &copy; {new Date().getFullYear()} Piscina Black-F. Todos los derechos reservados.
+          </p>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-colors text-sm group">
+            <img src="/red-enlace-logo.png" alt="Logo Red-Enlace" className="h-5 w-auto opacity-50 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0" />
+            <span>Desarrollado por Red-Enlace Soluciones Digitales</span>
+          </a>
         </div>
       </div>
     </footer>
