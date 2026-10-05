@@ -53,36 +53,67 @@ ${formData.message}
             {/* Columna Izquierda: Info de Contacto y Mapa */}
             <div className="lg:col-span-2 flex flex-col justify-center">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Inicia tu <span className="text-cyan-400">Proyecto</span></h2>
-              <p className="text-gray-300 mb-8">Déjanos tus datos o contáctanos directamente. ¡Estamos listos para hacer realidad tu piscina soñada!</p>
+              <p className="text-gray-300 mb-6">Déjanos tus datos o contáctanos directamente. ¡Estamos listos para hacer realidad tu piscina soñada!</p>
               
-              <div className="space-y-5 mb-10">
-                <div className="flex items-center gap-4 text-gray-300">
-                  <span className="text-cyan-400 text-2xl">📍</span>
-                  <span>Ruta 41, pasado el aeropuerto (Frente a gasolinera Shell), La Serena</span>
+              <div className="space-y-4 mb-8">
+                {/* Oficina La Serena */}
+                <div className="flex items-start gap-4 text-gray-300 bg-blue-950/20 p-4 rounded-xl border border-blue-900/30">
+                  <span className="text-cyan-400 text-2xl mt-1">📍</span>
+                  <div>
+                    <h4 className="text-white font-bold">Oficina La Serena</h4>
+                    <p className="text-sm">Ruta 41, pasado el aeropuerto (Frente a gasolinera Shell)</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 text-gray-300">
-                  <span className="text-cyan-400 text-2xl">📞</span>
+                
+                {/* Fábrica Buin */}
+                <div className="flex items-start gap-4 text-gray-300 bg-blue-950/20 p-4 rounded-xl border border-blue-900/30">
+                  <span className="text-cyan-400 text-2xl mt-1">🏭</span>
+                  <div>
+                    <h4 className="text-white font-bold">Fábrica Metropolitana</h4>
+                    <p className="text-sm">Cam. Padre Hurtado 5233, Buin</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 text-gray-300 pt-2 px-2">
+                  <span className="text-cyan-400 text-xl">📞</span>
                   <span>+56 9 5457 0802</span>
                 </div>
-                <div className="flex items-center gap-4 text-gray-300">
-                  <span className="text-cyan-400 text-2xl">✉️</span>
+                <div className="flex items-center gap-4 text-gray-300 px-2">
+                  <span className="text-cyan-400 text-xl">✉️</span>
                   <span>piscinablackf@gmail.com</span>
                 </div>
               </div>
 
-              {/* Mapa de Google */}
-              <div className="w-full h-64 md:h-72 rounded-2xl overflow-hidden border border-blue-900/50 relative shadow-lg">
-                <iframe 
-                  src="https://maps.google.com/maps?q=-29.925872,-71.180664&hl=es&z=15&output=embed" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen={false} 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0 opacity-70 hover:opacity-100 transition-opacity duration-500"
-                  title="Ubicación Piscina Black-F"
-                ></iframe>
+              {/* Mapas de Google */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="w-full h-40 rounded-xl overflow-hidden border border-blue-900/50 relative shadow-lg group">
+                  <div className="absolute top-2 left-2 z-10 bg-black/70 backdrop-blur-sm text-[10px] px-2 py-1 rounded text-white font-semibold uppercase tracking-wider">La Serena</div>
+                  <iframe 
+                    src="https://maps.google.com/maps?q=-29.925872,-71.180664&hl=es&z=13&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-500 filter contrast-125"
+                    title="Oficina La Serena"
+                  ></iframe>
+                </div>
+                <div className="w-full h-40 rounded-xl overflow-hidden border border-blue-900/50 relative shadow-lg group">
+                  <div className="absolute top-2 left-2 z-10 bg-black/70 backdrop-blur-sm text-[10px] px-2 py-1 rounded text-white font-semibold uppercase tracking-wider">Fábrica Buin</div>
+                  <iframe 
+                    src="https://maps.google.com/maps?q=Cam.+Padre+Hurtado+5233,+Buin&hl=es&z=13&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-500 filter contrast-125"
+                    title="Fábrica Buin"
+                  ></iframe>
+                </div>
               </div>
             </div>
 
