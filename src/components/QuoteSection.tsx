@@ -80,7 +80,7 @@ ${formData.message}
                 </div>
                 <div className="flex items-center gap-4 text-gray-300 px-2">
                   <span className="text-cyan-400 text-xl">✉️</span>
-                  <span>piscinablackf@gmail.com</span>
+                  <span>contacto@piscinablackf.cl</span>
                 </div>
               </div>
 
