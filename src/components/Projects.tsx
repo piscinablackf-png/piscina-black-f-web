@@ -5,28 +5,15 @@ import { useState, useEffect } from "react";
 export default function Projects() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
+  // Todas las imágenes locales únicas extraídas de WhatsApp (76 en total)
+  const allImages = Array.from({ length: 76 }, (_, i) => `/gallery/pool-${i + 1}.jpeg`);
+
   // Imágenes principales para la vista previa
   const previewImages = [
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826965/0bde7db2-b43c-4705-b2bb-27bae9a54867.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826977/1c4e4da3-f733-421b-8be7-b0a34683a51b.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826990/ecd74e01-4283-43fc-b2af-a446228a20bc.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80827022/037fd400-07ec-4457-9fe9-2afc2f2e50e5.jpeg'
-  ];
-
-  // Todas las imágenes rescatadas para la galería completa
-  const allImages = [
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826939/a8807feb-df6c-4630-988b-093b61da28c5.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826940/4f842d4e-11dd-4c5c-92df-a9b736cc07db.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826950/dc792fa1-fd3c-4af4-987c-946397df7bba.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826951/08dedb86-b588-4328-9a2a-6b2c82458e05.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826965/0bde7db2-b43c-4705-b2bb-27bae9a54867.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826966/6c0918ea-6442-482a-94b8-b15d609a042a.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826977/1c4e4da3-f733-421b-8be7-b0a34683a51b.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826978/c7ff68fc-3fe9-4202-a614-f10f913d1709.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826990/ecd74e01-4283-43fc-b2af-a446228a20bc.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80826991/69c030d0-ca8e-48fe-a678-77fd1de9eafc.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80827022/037fd400-07ec-4457-9fe9-2afc2f2e50e5.jpeg',
-    'https://cdnx.jumpseller.com/piscina-black-f/image/80827023/434158de-b1cf-4ce1-945b-04e765db49e7.jpeg'
+    allImages[0],
+    allImages[1],
+    allImages[2],
+    allImages[3]
   ];
 
   // Prevenir scroll en el body cuando la galería está abierta
